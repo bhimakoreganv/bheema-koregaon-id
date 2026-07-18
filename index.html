@@ -3,43 +3,83 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bheema Koregaon Member ID</title>
+<title>Member Registration</title>
 
-<link rel="stylesheet" href="style.css">
+<style>
+body{
+font-family:Arial,sans-serif;
+background:#f2f5ff;
+margin:0;
+padding:20px;
+}
+
+.container{
+max-width:500px;
+margin:auto;
+background:white;
+padding:20px;
+border-radius:12px;
+box-shadow:0 0 10px rgba(0,0,0,0.2);
+}
+
+h2{
+text-align:center;
+color:#003399;
+}
+
+input,select,textarea{
+width:100%;
+padding:12px;
+margin-top:10px;
+margin-bottom:15px;
+border:1px solid #ccc;
+border-radius:8px;
+}
+
+button{
+width:100%;
+padding:14px;
+background:#003399;
+color:white;
+border:none;
+border-radius:8px;
+font-size:18px;
+}
+
+button:hover{
+background:#FFD700;
+color:black;
+}
+</style>
 
 </head>
-
 <body>
 
-<header>
-<img src="images/logo.png" alt="Logo" width="120">
+<div class="container">
 
-<h1>ಭೀಮಾ ಕೋರೆಗಾಂವ್</h1>
+<h2>ಭೀಮಾ ಕೋರೆಗಾಂವ್ ಸದಸ್ಯ ನೋಂದಣಿ</h2>
 
-<p>ಸಮಾನತೆ | ನ್ಯಾಯ | ಸ್ವಾತಂತ್ರ್ಯ</p>
+<input type="file">
 
-</header>
+<input type="text" placeholder="Full Name">
 
-<section>
+<input type="text" placeholder="Father Name">
 
-<img src="images/banner.png" alt="Banner" width="100%">
+<input type="tel" placeholder="Mobile Number">
 
-</section>
+<input type="text" placeholder="Aadhaar Number">
 
-<section>
+<input type="text" placeholder="District">
 
-<h2>Welcome</h2>
+<input type="text" placeholder="Taluk">
 
-<p>Bheema Koregaon Member ID Website</p>
+<input type="text" placeholder="Village">
 
-<button>Register</button>
+<textarea placeholder="Address"></textarea>
 
-<button>Verify Member ID</button>
+<button>Register Member</button>
 
-<button>Contact Us</button>
-
-</section>
+</div>
 
 </body>
-
 </html>
