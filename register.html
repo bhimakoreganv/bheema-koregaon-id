@@ -1,976 +1,476 @@
-<!DOCTYPE html>
-<html lang="en">
+// ==========================================
+// Bhima Koregaon Member Portal
+// register.js
+// Part 1
+// ==========================================
 
-<head>
+import { db } from "./firebase.js";
 
-<meta charset="UTF-8">
+import {
+  collection,
+  getDocs,
+  query,
+  orderBy,
+  limit,
+  addDoc,
+  serverTimestamp
 
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
+} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
-<title>
+// =========================
+// Form Elements
+// =========================
 
-Member Registration
+const form = document.getElementById("registerForm");
 
-</title>
+const loading = document.getElementById("loading");
 
-<link
-rel="stylesheet"
-href="style.css">
+const successCard = document.getElementById("registerSuccess");
 
-<link
-rel="preconnect"
-href="https://fonts.googleapis.com">
+const successMessage = document.getElementById("successMessage");
 
-<link
-rel="preconnect"
-href="https://fonts.gstatic.com"
-crossorigin>
+const errorMessage = document.getElementById("errorMessage");
 
-<link
-href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-rel="stylesheet">
+const generatedMemberId = document.getElementById("generatedMemberId");
 
-<link
-rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+// =========================
+// Form Submit
+// =========================
 
-</head>
+form.addEventListener("submit", async (e) => {
 
-<body>
+e.preventDefault();
 
-<header class="header">
+loading.style.display = "block";
 
-<div class="logo-area">
+successMessage.style.display = "none";
 
-<img
-src="images/logo.png"
-class="logo">
+errorMessage.style.display = "none";
 
-<div>
+try{
 
-<h1>
+// =========================
+// Read Form Values
+// =========================
 
-Bhima Koregaon
+const fullName =
+document.getElementById("fullName").value.trim();
 
-</h1>
+const fatherName =
+document.getElementById("fatherName").value.trim();
 
-<p>
+const dob =
+document.getElementById("dob").value;
 
-Member Registration Portal
+const gender =
+document.getElementById("gender").value;
 
-</p>
+const mobile =
+document.getElementById("mobile").value.trim();
 
-</div>
+const email =
+document.getElementById("email").value.trim();
 
-</div>
+const aadhaar =
+document.getElementById("aadhaar").value.trim();
 
-<nav>
+const bloodGroup =
+document.getElementById("bloodGroup").value;
 
-<ul>
+const district =
+document.getElementById("district").value;
 
-<li>
+const taluk =
+document.getElementById("taluk").value.trim();
 
-<a href="index.html">
+const village =
+document.getElementById("village").value.trim();
 
-Home
+const pincode =
+document.getElementById("pincode").value.trim();
 
-</a>
+const address =
+document.getElementById("address").value.trim();
 
-</li>
+const membershipType =
+document.getElementById("membershipType").value;
 
-<li>
+const occupation =
+document.getElementById("occupation").value.trim();
 
-<a href="register.html"
-class="active">
+const joiningDate =
+document.getElementById("joiningDate").value;
 
-Register
+const status =
+document.getElementById("status").value;
 
-</a>
+const emergencyName =
+document.getElementById("emergencyName").value.trim();
 
-</li>
+const emergencyMobile =
+document.getElementById("emergencyMobile").value.trim();
 
-<li>
+const relation =
+document.getElementById("relation").value;
 
-<a href="verify.html">
+const declaration =
+document.getElementById("declaration").checked;
 
-Verify
+// =========================
+// Validation
+// =========================
 
-</a>
+if(
 
-</li>
+!fullName ||
 
-<li>
+!fatherName ||
 
-<a href="admin.html">
+!dob ||
 
-Admin
+!gender ||
 
-</a>
+!mobile ||
 
-</li>
+!district ||
 
-</ul>
+!taluk ||
 
-</nav>
+!village ||
 
-</header>
+!address ||
 
-<section class="form-section">
+!membershipType ||
 
-<div class="form-box">
+!declaration
 
-<h2>
+){
 
-Member Registration
+throw new Error("Please fill all required fields.");
 
-</h2>
+}
+// =========================
+// Generate Next Member ID
+// =========================
 
-<p>
+const membersRef = collection(db, "members");
 
-Please fill all details correctly.
+const lastMemberQuery = query(
+  membersRef,
+  orderBy("memberId", "desc"),
+  limit(1)
+);
 
-</p>
+const lastMemberSnapshot = await getDocs(lastMemberQuery);
 
-<form id="registerForm">
-  <!-- ========================= -->
-<!-- PERSONAL DETAILS -->
-<!-- ========================= -->
+let memberId = "BK000001";
 
-<div class="form-group">
+if (!lastMemberSnapshot.empty) {
 
-<label for="fullName">
-Full Name *
-</label>
+  const lastMember = lastMemberSnapshot.docs[0].data();
 
-<input
-type="text"
-id="fullName"
-name="fullName"
-placeholder="Enter Full Name"
-required>
+  const lastId = lastMember.memberId || "BK000000";
 
-</div>
+  const lastNumber = parseInt(lastId.replace("BK", ""), 10);
 
-<div class="form-group">
+  const nextNumber = lastNumber + 1;
 
-<label for="fatherName">
-Father / Husband Name *
-</label>
+  memberId =
+    "BK" + String(nextNumber).padStart(6, "0");
 
-<input
-type="text"
-id="fatherName"
-name="fatherName"
-placeholder="Enter Father / Husband Name"
-required>
+}
 
-</div>
+// =========================
+// Member Data Object
+// =========================
 
-<div class="form-row">
+const memberData = {
 
-<div class="form-group">
+  memberId,
 
-<label for="dob">
-Date of Birth *
-</label>
+  fullName,
 
-<input
-type="date"
-id="dob"
-name="dob"
-required>
+  fatherName,
 
-</div>
+  dob,
 
-<div class="form-group">
+  gender,
 
-<label for="gender">
-Gender *
-</label>
+  mobile,
 
-<select
-id="gender"
-name="gender"
-required>
+  email,
 
-<option value="">
-Select Gender
-</option>
+  aadhaar,
 
-<option value="Male">
-Male
-</option>
+  bloodGroup,
 
-<option value="Female">
-Female
-</option>
+  district,
 
-<option value="Other">
-Other
-</option>
+  taluk,
 
-</select>
+  village,
 
-</div>
+  pincode,
 
-</div>
+  address,
 
-<div class="form-row">
+  membershipType,
 
-<div class="form-group">
+  occupation,
 
-<label for="mobile">
-Mobile Number *
-</label>
+  joiningDate,
 
-<input
-type="tel"
-id="mobile"
-name="mobile"
-maxlength="10"
-placeholder="9876543210"
-required>
+  status,
 
-</div>
+  emergencyName,
 
-<div class="form-group">
+  emergencyMobile,
 
-<label for="email">
-Email Address
-</label>
+  relation,
 
-<input
-type="email"
-id="email"
-name="email"
-placeholder="example@gmail.com">
+  createdAt: serverTimestamp()
 
-</div>
+};
+// =========================
+// Save Member to Firestore
+// =========================
 
-</div>
+await addDoc(
 
-<div class="form-group">
+collection(db, "members"),
 
-<label for="aadhaar">
-Aadhaar Number (Optional)
-</label>
+memberData
 
-<input
-type="text"
-id="aadhaar"
-name="aadhaar"
-maxlength="12"
-placeholder="1234 5678 9012">
+);
 
-</div>
+// =========================
+// Hide Loading
+// =========================
 
-<div class="form-group">
+loading.style.display = "none";
 
-<label for="bloodGroup">
-Blood Group
-</label>
+// =========================
+// Show Success
+// =========================
 
-<select
-id="bloodGroup"
-name="bloodGroup">
+generatedMemberId.textContent = memberId;
 
-<option value="">
-Select Blood Group
-</option>
+successMessage.style.display = "block";
 
-<option>A+</option>
-<option>A-</option>
-<option>B+</option>
-<option>B-</option>
-<option>AB+</option>
-<option>AB-</option>
-<option>O+</option>
-<option>O-</option>
+successCard.style.display = "block";
 
-</select>
+// =========================
+// Reset Form
+// =========================
 
-</div>
-<!-- ========================= -->
-<!-- ADDRESS DETAILS -->
-<!-- ========================= -->
+form.reset();
 
-<h3 class="section-title">
-Address Details
-</h3>
-
-<div class="form-row">
-
-<div class="form-group">
-
-<label for="district">
-District *
-</label>
-
-<select
-id="district"
-name="district"
-required>
-
-<option value="">
-Select District
-</option>
-
-<option>Kalaburagi</option>
-<option>Vijayapura</option>
-<option>Yadgir</option>
-<option>Raichur</option>
-<option>Koppal</option>
-<option>Ballari</option>
-<option>Bidar</option>
-<option>Belagavi</option>
-<option>Dharwad</option>
-<option>Bagalkot</option>
-<option>Other</option>
-
-</select>
-
-</div>
-
-<div class="form-group">
-
-<label for="taluk">
-Taluk *
-</label>
-
-<input
-type="text"
-id="taluk"
-name="taluk"
-placeholder="Enter Taluk"
-required>
-
-</div>
-
-</div>
-
-<div class="form-row">
-
-<div class="form-group">
-
-<label for="village">
-Village *
-</label>
-
-<input
-type="text"
-id="village"
-name="village"
-placeholder="Enter Village Name"
-required>
-
-</div>
-
-<div class="form-group">
-
-<label for="pincode">
-Pincode *
-</label>
-
-<input
-type="number"
-id="pincode"
-name="pincode"
-maxlength="6"
-placeholder="585310"
-required>
-
-</div>
-
-</div>
-
-<div class="form-group">
-
-<label for="address">
-Full Address *
-</label>
-
-<textarea
-id="address"
-name="address"
-rows="4"
-placeholder="Enter Complete Address"
-required></textarea>
-
-</div>
-
-<!-- ========================= -->
-<!-- MEMBERSHIP DETAILS -->
-<!-- ========================= -->
-
-<h3 class="section-title">
-Membership Details
-</h3>
-
-<div class="form-row">
-
-<div class="form-group">
-
-<label for="membershipType">
-Membership Type *
-</label>
-
-<select
-id="membershipType"
-name="membershipType"
-required>
-
-<option value="">
-Select Membership
-</option>
-
-<option value="General">
-General Member
-</option>
-
-<option value="Life">
-Life Member
-</option>
-
-<option value="Volunteer">
-Volunteer
-</option>
-
-<option value="Executive">
-Executive Member
-</option>
-
-</select>
-
-</div>
-
-<div class="form-group">
-
-<label for="occupation">
-Occupation
-</label>
-
-<input
-type="text"
-id="occupation"
-name="occupation"
-placeholder="Occupation">
-
-</div>
-
-</div>
-
-<div class="form-row">
-
-<div class="form-group">
-
-<label for="joiningDate">
-Joining Date
-</label>
-
-<input
-type="date"
-id="joiningDate"
-name="joiningDate">
-
-</div>
-
-<div class="form-group">
-
-<label for="status">
-Status
-</label>
-
-<select
-id="status"
-name="status">
-
-<option value="Active" selected>
-Active
-</option>
-
-<option value="Inactive">
-Inactive
-</option>
-
-</select>
-
-</div>
-
-</div>
-<!-- ========================= -->
-<!-- PHOTO & EMERGENCY DETAILS -->
-<!-- ========================= -->
-
-<h3 class="section-title">
-
-Photo & Emergency Details
-
-</h3>
-
-<div class="form-group">
-
-<label for="photo">
-
-Member Photo *
-
-</label>
-
-<input
-type="file"
-id="photo"
-name="photo"
-accept="image/*"
-required>
-
-<small>
-
-Upload Passport Size Photo (JPG / PNG)
-
-</small>
-
-</div>
-
-<div class="photo-preview">
-
-<img
-id="photoPreview"
-src="images/default-user.png"
-alt="Photo Preview">
-
-</div>
-
-<div class="form-row">
-
-<div class="form-group">
-
-<label for="emergencyName">
-
-Emergency Contact Name
-
-</label>
-
-<input
-type="text"
-id="emergencyName"
-name="emergencyName"
-placeholder="Emergency Contact Name">
-
-</div>
-
-<div class="form-group">
-
-<label for="emergencyMobile">
-
-Emergency Mobile Number
-
-</label>
-
-<input
-type="tel"
-id="emergencyMobile"
-name="emergencyMobile"
-maxlength="10"
-placeholder="9876543210">
-
-</div>
-
-</div>
-
-<div class="form-group">
-
-<label for="relation">
-
-Relationship
-
-</label>
-
-<select
-id="relation"
-name="relation">
-
-<option value="">
-
-Select Relationship
-
-</option>
-
-<option>
-
-Father
-
-</option>
-
-<option>
-
-Mother
-
-</option>
-
-<option>
-
-Brother
-
-</option>
-
-<option>
-
-Sister
-
-</option>
-
-<option>
-
-Husband
-
-</option>
-
-<option>
-
-Wife
-
-</option>
-
-<option>
-
-Friend
-
-</option>
-
-<option>
-
-Other
-
-</option>
-
-</select>
-
-</div>
-
-<!-- ========================= -->
-<!-- DECLARATION -->
-<!-- ========================= -->
-
-<div class="declaration-box">
-
-<label class="checkbox-label">
-
-<input
-type="checkbox"
-id="declaration"
-required>
-
-<span>
-
-I hereby declare that the information provided above is true and correct.
-
-</span>
-
-</label>
-
-</div>
-
-<div id="successMessage"
-
-class="success-box"
-
-style="display:none;">
-
-✅ Registration Successful
-
-</div>
-
-<div id="errorMessage"
-
-class="error-box"
-
-style="display:none;">
-
-❌ Registration Failed
-
-</div>
-<!-- ========================= -->
-<!-- ACTION BUTTONS -->
-<!-- ========================= -->
-
-<div class="button-group">
-
-<button
-type="submit"
-class="btn"
-id="registerBtn">
-
-<i class="fa-solid fa-user-plus"></i>
-
-Register Member
-
-</button>
-
-<button
-type="reset"
-class="btn2">
-
-<i class="fa-solid fa-rotate-left"></i>
-
-Reset Form
-
-</button>
-
-<a
-href="index.html"
-class="btn2">
-
-<i class="fa-solid fa-house"></i>
-
-Back To Home
-
-</a>
-
-</div>
-
-<!-- ========================= -->
-<!-- LOADING -->
-<!-- ========================= -->
-
-<div
-id="loading"
-
-class="loader"
-
-style="display:none;">
-
-</div>
-
-<!-- ========================= -->
-<!-- SUCCESS CARD -->
-<!-- ========================= -->
-
-<div
-id="registerSuccess"
-
-class="success-card"
-
-style="display:none;">
-
-<i
-class="fa-solid fa-circle-check">
-
-</i>
-
-<h2>
-
-Registration Successful
-
-</h2>
-
-<p>
-
-Member Registered Successfully
-
-</p>
-
-<h3>
-
-Member ID
-
-</h3>
-
-<h2
-id="generatedMemberId">
-
-BK000001
-
-</h2>
-
-<a
-href="verify.html"
-class="btn">
-
-Verify Member
-
-</a>
-
-<a
-href="idcard.html"
-class="btn2">
-
-View ID Card
-
-</a>
-
-</div>
-
-</form>
-
-</div>
-
-</section>
-<!-- ========================= -->
-<!-- FOOTER -->
-<!-- ========================= -->
-
-<footer>
-
-<div class="footer-container">
-
-<div>
-
-<h3>
-
-Bhima Koregaon Member Portal
-
-</h3>
-
-<p>
-
-Equality • Justice • Freedom
-
-</p>
-
-</div>
-
-<div>
-
-<h3>
-
-Quick Links
-
-</h3>
-
-<ul>
-
-<li><a href="index.html">Home</a></li>
-
-<li><a href="register.html">Register</a></li>
-
-<li><a href="verify.html">Verify</a></li>
-
-<li><a href="admin.html">Admin</a></li>
-
-</ul>
-
-</div>
-
-<div>
-
-<h3>
-
-Contact
-
-</h3>
-
-<p>📍 Karnataka, India</p>
-
-<p>📞 +91 XXXXXXXXXX</p>
-
-<p>📧 your@email.com</p>
-
-</div>
-
-</div>
-
-<hr>
-
-<p class="copyright">
-
-© 2026 Bhima Koregaon Member Portal.
-All Rights Reserved.
-
-</p>
-
-</footer>
-
-<!-- ========================= -->
-<!-- SCROLL TO TOP -->
-<!-- ========================= -->
-
-<button
-id="topBtn"
-title="Go to top">
-
-↑
-
-</button>
-
-<!-- ========================= -->
-<!-- FIREBASE -->
-<!-- ========================= -->
-
-<script type="module" src="firebase.js"></script>
-
-<!-- ========================= -->
-<!-- REGISTER -->
-<!-- ========================= -->
-
-<script type="module" src="register.js"></script>
-
-<!-- ========================= -->
-<!-- PHOTO PREVIEW -->
-<!-- ========================= -->
-
-<script>
-
-const photoInput =
-document.getElementById("photo");
+// Reset Photo Preview (Spark Version)
 
 const photoPreview =
 document.getElementById("photoPreview");
 
-photoInput.addEventListener("change", function(){
+if(photoPreview){
 
-const file = this.files[0];
-
-if(file){
-
-const reader = new FileReader();
-
-reader.onload = function(e){
-
-photoPreview.src = e.target.result;
+photoPreview.src =
+"images/default-user.png";
 
 }
 
-reader.readAsDataURL(file);
+// Scroll to Success Card
 
-}
+successCard.scrollIntoView({
+
+behavior:"smooth"
 
 });
+// =========================
+// Error Handling
+// =========================
 
-// Scroll Button
+}catch(error){
 
-const topBtn =
-document.getElementById("topBtn");
+console.error("Registration Error:", error);
 
-window.onscroll = function(){
+loading.style.display = "none";
 
-if(document.body.scrollTop > 200 ||
+errorMessage.style.display = "block";
 
-document.documentElement.scrollTop > 200){
+errorMessage.innerHTML =
 
-topBtn.style.display="block";
+"❌ " + error.message;
 
-}else{
-
-topBtn.style.display="none";
-
-}
-
-};
-
-topBtn.onclick = function(){
-
-window.scrollTo({
-
-top:0,
+errorMessage.scrollIntoView({
 
 behavior:"smooth"
 
 });
 
-};
+}
 
-</script>
+// =========================
+// End Form Submit
+// =========================
 
-</body>
+});
 
-</html>
+// ==========================================
+// Helper Functions
+// ==========================================
+
+// Mobile Validation
+
+const mobileInput =
+
+document.getElementById("mobile");
+
+mobileInput.addEventListener("input",()=>{
+
+mobileInput.value =
+
+mobileInput.value.replace(/\D/g,"");
+
+});
+
+// Aadhaar Validation
+
+const aadhaarInput =
+
+document.getElementById("aadhaar");
+
+aadhaarInput.addEventListener("input",()=>{
+
+aadhaarInput.value =
+
+aadhaarInput.value.replace(/\D/g,"");
+
+});
+
+// Auto Joining Date
+
+const joiningDate =
+
+document.getElementById("joiningDate");
+
+if(joiningDate.value===""){
+
+const today = new Date();
+
+joiningDate.value =
+
+today.toISOString().split("T")[0];
+
+}
+// ==========================================
+// Utility Functions
+// ==========================================
+
+// Email Validation
+
+function isValidEmail(email){
+
+const pattern =
+
+/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+return pattern.test(email);
+
+}
+
+// Mobile Validation
+
+function isValidMobile(mobile){
+
+return /^[6-9]\d{9}$/.test(mobile);
+
+}
+
+// Aadhaar Validation
+
+function isValidAadhaar(aadhaar){
+
+if(aadhaar==="") return true;
+
+return /^\d{12}$/.test(aadhaar);
+
+}
+
+// =========================
+// Extra Validation
+// =========================
+
+if(!isValidMobile(mobile)){
+
+throw new Error(
+
+"Enter valid 10 digit mobile number."
+
+);
+
+}
+
+if(email && !isValidEmail(email)){
+
+throw new Error(
+
+"Invalid Email Address."
+
+);
+
+}
+
+if(!isValidAadhaar(aadhaar)){
+
+throw new Error(
+
+"Aadhaar must contain 12 digits."
+
+);
+
+}
+
+// =========================
+// Disable Register Button
+// =========================
+
+const registerBtn =
+
+document.getElementById("registerBtn");
+
+registerBtn.disabled = true;
+
+registerBtn.innerHTML =
+
+'<i class="fa-solid fa-spinner fa-spin"></i> Registering...';
+
+// =========================
+// Enable Register Button
+// =========================
+
+function enableRegisterButton(){
+
+registerBtn.disabled = false;
+
+registerBtn.innerHTML =
+
+'<i class="fa-solid fa-user-plus"></i> Register Member';
+
+}
+
+// =========================
+// Success Cleanup
+// =========================
+
+setTimeout(()=>{
+
+successMessage.style.display="none";
+
+},5000);
+
+setTimeout(()=>{
+
+errorMessage.style.display="none";
+
+},5000);
+
+enableRegisterButton();
