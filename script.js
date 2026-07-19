@@ -1,4 +1,3 @@
-// Firebase SDK
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import {
   getFirestore,
@@ -7,14 +6,14 @@ import {
   serverTimestamp
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-// ನಿಮ್ಮ Firebase Config ಇಲ್ಲಿ ಹಾಕಿ
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT.firebaseapp.com",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_PROJECT.appspot.com",
-  messagingSenderId: "YOUR_SENDER_ID",
-  appId: "YOUR_APP_ID"
+  apiKey: "AIzaSyA1h6LJ0utIIxbzzEpcm38y32MZ1lwFCVo",
+  authDomain: "bheema-koregaon-id.firebaseapp.com",
+  projectId: "bheema-koregaon-id",
+  storageBucket: "bheema-koregaon-id.firebasestorage.app",
+  messagingSenderId: "472642489350",
+  appId: "1:472642489350:web:f95e96b4ad452325b48787",
+  measurementId: "G-5K6CSD3R61"
 };
 
 const app = initializeApp(firebaseConfig);
@@ -34,10 +33,11 @@ form.addEventListener("submit", async (e) => {
       createdAt: serverTimestamp()
     });
 
-    alert("Member Registered Successfully!");
+    alert("✅ Member Registered Successfully!");
+
     form.reset();
 
-  } catch (err) {
-    alert("Error: " + err.message);
+  } catch (error) {
+    alert("❌ Error: " + error.message);
   }
 });
