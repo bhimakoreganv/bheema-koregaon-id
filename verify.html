@@ -1,1 +1,564 @@
 
+<!DOCTYPE html>
+<html lang="kn">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>
+
+Verify Member ID
+
+</title>
+
+<link rel="stylesheet"
+href="style.css">
+
+<link rel="preconnect"
+href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+</head>
+
+<body>
+
+<!-- ========================= -->
+<!-- HEADER -->
+<!-- ========================= -->
+
+<header class="header">
+
+<div class="logo-area">
+
+<img
+src="images/logo.png"
+class="logo"
+alt="Logo">
+
+<div>
+
+<h1>
+
+Verify Member ID
+
+</h1>
+
+<p>
+
+ಭೀಮಾ ಕೋರೆಗಾಂವ್
+ಸದಸ್ಯರ ಪರಿಶೀಲನೆ
+
+</p>
+
+</div>
+
+</div>
+
+<nav>
+
+<ul>
+
+<li>
+
+<a href="index.html">
+
+Home
+
+</a>
+
+</li>
+
+<li>
+
+<a href="register.html">
+
+Register
+
+</a>
+
+</li>
+
+<li>
+
+<a href="verify.html"
+class="active">
+
+Verify
+
+</a>
+
+</li>
+
+<li>
+
+<a href="contact.html">
+
+Contact
+
+</a>
+
+</li>
+
+</ul>
+
+</nav>
+
+</header>
+
+<!-- ========================= -->
+<!-- VERIFY SECTION -->
+<!-- ========================= -->
+
+<section class="verify-section">
+
+<div class="verify-box">
+
+<h2>
+
+Verify Member
+
+</h2>
+
+<p>
+
+Enter Member ID
+
+</p>
+
+<input
+type="text"
+id="memberId"
+placeholder="Example : BK000001">
+
+<button
+
+onclick="verifyMember()"
+
+class="btn">
+
+Verify Member
+
+</button>
+
+</div>
+
+</section>
+
+<!-- ========================= -->
+<!-- RESULT -->
+<!-- ========================= -->
+
+<section
+class="result-section">
+
+<div
+id="result"
+
+class="result-box">
+
+<h2>
+
+Verification Result
+
+</h2>
+
+<p>
+
+Search a Member ID
+to view details.
+
+</p>
+
+</div>
+
+</section>
+<!-- ========================= -->
+<!-- MEMBER DETAILS CARD -->
+<!-- ========================= -->
+
+<section class="member-card-section">
+
+<div class="member-card" id="memberCard" style="display:none;">
+
+<div class="member-photo">
+
+<img
+id="photo"
+src="images/default-user.png"
+alt="Member Photo">
+
+</div>
+
+<div class="member-details">
+
+<h2 id="name">
+
+Member Name
+
+</h2>
+
+<table>
+
+<tr>
+
+<td>
+
+<b>Member ID</b>
+
+</td>
+
+<td id="memberid">
+
+BK000001
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+<b>Mobile</b>
+
+</td>
+
+<td id="mobile">
+
+9999999999
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+<b>Email</b>
+
+</td>
+
+<td id="email">
+
+member@email.com
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+<b>District</b>
+
+</td>
+
+<td id="district">
+
+Kalaburagi
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+<b>Taluk</b>
+
+</td>
+
+<td id="taluk">
+
+Jewargi
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+<b>Village</b>
+
+</td>
+
+<td id="village">
+
+Kallur (K)
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+<b>Address</b>
+
+</td>
+
+<td id="address">
+
+Member Address
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+<b>Status</b>
+
+</td>
+
+<td>
+
+<span class="verified">
+
+✔ VERIFIED
+
+</span>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+<b>Registered On</b>
+
+</td>
+
+<td id="date">
+
+01 Jan 2026
+
+</td>
+
+</tr>
+
+</table>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ========================= -->
+<!-- QR CODE -->
+<!-- ========================= -->
+
+<section class="qr-section">
+
+<div class="qr-box">
+
+<h2>
+
+Member QR Code
+
+</h2>
+
+<img
+src="images/qr.png"
+id="qrImage"
+alt="QR Code">
+
+<p>
+
+Scan to Verify
+
+</p>
+
+</div>
+
+</section>
+
+<!-- ========================= -->
+<!-- DOWNLOAD BUTTON -->
+<!-- ========================= -->
+
+<section class="download-section">
+
+<button
+class="btn"
+onclick="window.print()">
+
+Download / Print ID
+
+</button>
+
+<a
+href="register.html"
+class="btn2">
+
+New Registration
+
+</a>
+
+</section>
+<!-- ========================= -->
+<!-- CONTACT -->
+<!-- ========================= -->
+
+<section class="contact-section">
+
+<h2>
+
+Need Help?
+
+</h2>
+
+<p>
+
+For Member Support Contact Us
+
+</p>
+
+<div class="contact-buttons">
+
+<a
+href="tel:+919999999999"
+class="btn">
+
+📞 Call Now
+
+</a>
+
+<a
+href="https://wa.me/919999999999"
+class="btn2">
+
+💬 WhatsApp
+
+</a>
+
+</div>
+
+</section>
+
+<!-- ========================= -->
+<!-- FOOTER -->
+<!-- ========================= -->
+
+<footer>
+
+<div class="footer-container">
+
+<div>
+
+<h3>
+
+Bhima Koregaon
+Member Portal
+
+</h3>
+
+<p>
+
+Equality • Justice • Freedom
+
+</p>
+
+</div>
+
+<div>
+
+<h3>
+
+Quick Links
+
+</h3>
+
+<ul>
+
+<li><a href="index.html">Home</a></li>
+
+<li><a href="register.html">Register</a></li>
+
+<li><a href="verify.html">Verify</a></li>
+
+<li><a href="contact.html">Contact</a></li>
+
+</ul>
+
+</div>
+
+<div>
+
+<h3>
+
+Follow Us
+
+</h3>
+
+<a href="#"><i class="fab fa-facebook"></i></a>
+
+<a href="#"><i class="fab fa-instagram"></i></a>
+
+<a href="#"><i class="fab fa-youtube"></i></a>
+
+</div>
+
+</div>
+
+<hr>
+
+<p>
+
+© 2026 Bhima Koregaon Member Portal
+
+</p>
+
+</footer>
+
+<!-- Scroll To Top -->
+
+<button id="topBtn"
+
+onclick="window.scrollTo({
+
+top:0,
+
+behavior:'smooth'
+
+});">
+
+↑
+
+</button>
+
+<!-- Firebase -->
+
+<script type="module" src="firebase.js"></script>
+
+<!-- Verify Logic -->
+
+<script type="module" src="verify.js"></script>
+
+</body>
+
+</html>
