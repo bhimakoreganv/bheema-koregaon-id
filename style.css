@@ -1,87 +1,46 @@
-body{
-margin:0;
-padding:0;
-font-family:Arial,sans-serif;
-background:#f4f6fb;
+.form-box{
+    max-width:500px;
+    margin:30px auto;
+    background:#fff;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 5px 20px rgba(0,0,0,.2);
 }
 
-.header{
-background:#003399;
-color:white;
-text-align:center;
-padding:20px;
+.form-box label{
+    display:block;
+    margin-top:15px;
+    font-weight:bold;
 }
 
-.logo{
-width:140px;
-height:140px;
-border-radius:50%;
-border:5px solid gold;
+.form-box input,
+.form-box textarea{
+    width:100%;
+    padding:12px;
+    margin-top:6px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    box-sizing:border-box;
+    font-size:16px;
 }
 
-.header h1{
-color:#FFD700;
-font-size:40px;
-margin-top:10px;
+.form-box input[type=file]{
+    border:none;
+    padding:0;
 }
 
-.header p{
-font-size:18px;
+.form-box button{
+    width:100%;
+    margin-top:20px;
+    padding:15px;
+    font-size:20px;
+    border:none;
+    border-radius:10px;
+    background:#0b4dbb;
+    color:#fff;
+    cursor:pointer;
 }
 
-.banner{
-padding:20px;
-text-align:center;
-}
-
-.banner img{
-width:95%;
-max-width:900px;
-border-radius:15px;
-box-shadow:0 0 15px rgba(0,0,0,.3);
-}
-
-.welcome{
-text-align:center;
-padding:20px;
-}
-
-.buttons{
-text-align:center;
-padding:20px;
-}
-
-.btn{
-display:block;
-width:260px;
-margin:15px auto;
-padding:15px;
-background:#003399;
-color:white;
-text-decoration:none;
-font-size:20px;
-border-radius:10px;
-transition:.3s;
-}
-
-.btn:hover{
-background:#FFD700;
-color:black;
-}
-
-.about{
-background:white;
-margin:20px;
-padding:20px;
-border-radius:10px;
-text-align:center;
-box-shadow:0 0 10px rgba(0,0,0,.2);
-}
-
-footer{
-background:#003399;
-color:white;
-text-align:center;
-padding:15px;
-margin-top:20px;
+.form-box button:hover{
+    background:#083b91;
 }
