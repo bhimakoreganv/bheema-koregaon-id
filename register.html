@@ -1,54 +1,22 @@
-<!DOCTYPE html>
-<html lang="kn">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Register Member</title>
-
-<link rel="stylesheet" href="style.css">
-</head>
-
-<body>
-
-<header class="header">
-<img src="images/logo.png" class="logo">
-<h1>Member Registration</h1>
-<p>ಭೀಮಾ ಕೋರೆಗಾಂವ್ ಸದಸ್ಯರ ನೋಂದಣಿ</p>
-</header>
-
-<div class="about">
-
-<form id="registerForm">
+<div class="form-box">
 
 <label>Full Name</label>
-<input type="text" id="name" required>
+<input type="text" id="name">
 
 <label>Mobile Number</label>
-<input type="tel" id="mobile" required>
+<input type="tel" id="mobile">
 
 <label>Email</label>
 <input type="email" id="email">
 
 <label>Address</label>
 <textarea id="address"></textarea>
-  <label>Member Photo</label>
 
-<input type="file"
-id="photo"
-accept="image/*">
-<br><br>
+<label>Member Photo</label>
+<input type="file" id="photo" accept="image/*">
 
-<button class="btn" type="submit">
+<button onclick="registerMember()">
 Register Member
 </button>
 
-</form>
-
-<p id="msg"></p>
-
 </div>
-
-<script type="module" src="script.js"></script>
-
-</body>
-</html>
