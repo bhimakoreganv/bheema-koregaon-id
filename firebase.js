@@ -1,20 +1,58 @@
+// ==========================================
+// Bhima Koregaon Member Portal
+// firebase.js (Version 2)
+// ==========================================
 
-    // firebase.js
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
-    import { getFirestore } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
-    import { getStorage } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-storage.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
-    const firebaseConfig = {
-      apiKey: "AIzaSyA1h6LJ0utIIxbzzEpcm38y32MZ1lwFCVo",
-      authDomain: "bheema-koregaon-id.firebaseapp.com",
-      projectId: "bheema-koregaon-id",
-      storageBucket: "bheema-koregaon-id.firebasestorage.app",
-      messagingSenderId: "472642489350",
-      appId: "1:472642489350:web:f95e96b4ad452325b48787",
-      measurementId: "G-5K6CSD3R61"
-    };
+import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-    const app = initializeApp(firebaseConfig);
+import { getStorage } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
 
-    export const db = getFirestore(app);
-    export const storage = getStorage(app);
+import { getAuth } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+const firebaseConfig = {
+
+  apiKey: "AIzaSyA1h6LJ0utIIxbzzEpcm38y32MZ1lwFCVo",
+
+  authDomain: "bheema-koregaon-id.firebaseapp.com",
+
+  projectId: "bheema-koregaon-id",
+
+  storageBucket: "bheema-koregaon-id.firebasestorage.app",
+
+  messagingSenderId: "472642489350",
+
+  appId: "1:472642489350:web:f95e96b4ad452325b48787"
+
+};
+
+// Initialize Firebase
+
+const app = initializeApp(firebaseConfig);
+
+// Firestore
+
+const db = getFirestore(app);
+
+// Storage
+
+const storage = getStorage(app);
+
+// Authentication
+
+const auth = getAuth(app);
+
+// Export
+
+export {
+
+  app,
+
+  db,
+
+  storage,
+
+  auth
+
+};
