@@ -1,100 +1,976 @@
 <!DOCTYPE html>
-<html lang="kn">
+<html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Member Registration</title>
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
-<link rel="stylesheet" href="style.css">
+<title>
+
+Member Registration
+
+</title>
+
+<link
+rel="stylesheet"
+href="style.css">
+
+<link
+rel="preconnect"
+href="https://fonts.googleapis.com">
+
+<link
+rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
+
+<link
+href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+rel="stylesheet">
+
+<link
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
 </head>
 
 <body>
 
 <header class="header">
 
-<img src="images/logo.png" class="logo" alt="Logo">
+<div class="logo-area">
 
-<h1>Member Registration</h1>
+<img
+src="images/logo.png"
+class="logo">
 
-<p>ಭೀಮಾ ಕೋರೆಗಾಂವ್ ಸದಸ್ಯರ ನೋಂದಣಿ</p>
+<div>
 
-</header>
+<h1>
 
+Bhima Koregaon
 
-<div class="form-box">
+</h1>
 
-<label>Full Name</label>
-<input type="text" id="name" placeholder="Enter Full Name">
+<p>
 
-<label>Mobile Number</label>
-<input type="tel" id="mobile" placeholder="Enter Mobile Number">
+Member Registration Portal
 
-<label>Email</label>
-<input type="email" id="email" placeholder="Enter Email">
-
-<label>Address</label>
-<textarea id="address" rows="4" placeholder="Enter Address"></textarea>
-
-<label>Member Photo</label>
-<input type="file"
-id="photo"
-accept="image/*">
-
-<button onclick="registerMember()">
-Register Member
-</button>
+</p>
 
 </div>
 
+</div>
 
-<div class="back-home">
+<nav>
 
-<a href="index.html" class="btn">
-🏠 Back To Home
+<ul>
+
+<li>
+
+<a href="index.html">
+
+Home
+
+</a>
+
+</li>
+
+<li>
+
+<a href="register.html"
+class="active">
+
+Register
+
+</a>
+
+</li>
+
+<li>
+
+<a href="verify.html">
+
+Verify
+
+</a>
+
+</li>
+
+<li>
+
+<a href="admin.html">
+
+Admin
+
+</a>
+
+</li>
+
+</ul>
+
+</nav>
+
+</header>
+
+<section class="form-section">
+
+<div class="form-box">
+
+<h2>
+
+Member Registration
+
+</h2>
+
+<p>
+
+Please fill all details correctly.
+
+</p>
+
+<form id="registerForm">
+  <!-- ========================= -->
+<!-- PERSONAL DETAILS -->
+<!-- ========================= -->
+
+<div class="form-group">
+
+<label for="fullName">
+Full Name *
+</label>
+
+<input
+type="text"
+id="fullName"
+name="fullName"
+placeholder="Enter Full Name"
+required>
+
+</div>
+
+<div class="form-group">
+
+<label for="fatherName">
+Father / Husband Name *
+</label>
+
+<input
+type="text"
+id="fatherName"
+name="fatherName"
+placeholder="Enter Father / Husband Name"
+required>
+
+</div>
+
+<div class="form-row">
+
+<div class="form-group">
+
+<label for="dob">
+Date of Birth *
+</label>
+
+<input
+type="date"
+id="dob"
+name="dob"
+required>
+
+</div>
+
+<div class="form-group">
+
+<label for="gender">
+Gender *
+</label>
+
+<select
+id="gender"
+name="gender"
+required>
+
+<option value="">
+Select Gender
+</option>
+
+<option value="Male">
+Male
+</option>
+
+<option value="Female">
+Female
+</option>
+
+<option value="Other">
+Other
+</option>
+
+</select>
+
+</div>
+
+</div>
+
+<div class="form-row">
+
+<div class="form-group">
+
+<label for="mobile">
+Mobile Number *
+</label>
+
+<input
+type="tel"
+id="mobile"
+name="mobile"
+maxlength="10"
+placeholder="9876543210"
+required>
+
+</div>
+
+<div class="form-group">
+
+<label for="email">
+Email Address
+</label>
+
+<input
+type="email"
+id="email"
+name="email"
+placeholder="example@gmail.com">
+
+</div>
+
+</div>
+
+<div class="form-group">
+
+<label for="aadhaar">
+Aadhaar Number (Optional)
+</label>
+
+<input
+type="text"
+id="aadhaar"
+name="aadhaar"
+maxlength="12"
+placeholder="1234 5678 9012">
+
+</div>
+
+<div class="form-group">
+
+<label for="bloodGroup">
+Blood Group
+</label>
+
+<select
+id="bloodGroup"
+name="bloodGroup">
+
+<option value="">
+Select Blood Group
+</option>
+
+<option>A+</option>
+<option>A-</option>
+<option>B+</option>
+<option>B-</option>
+<option>AB+</option>
+<option>AB-</option>
+<option>O+</option>
+<option>O-</option>
+
+</select>
+
+</div>
+<!-- ========================= -->
+<!-- ADDRESS DETAILS -->
+<!-- ========================= -->
+
+<h3 class="section-title">
+Address Details
+</h3>
+
+<div class="form-row">
+
+<div class="form-group">
+
+<label for="district">
+District *
+</label>
+
+<select
+id="district"
+name="district"
+required>
+
+<option value="">
+Select District
+</option>
+
+<option>Kalaburagi</option>
+<option>Vijayapura</option>
+<option>Yadgir</option>
+<option>Raichur</option>
+<option>Koppal</option>
+<option>Ballari</option>
+<option>Bidar</option>
+<option>Belagavi</option>
+<option>Dharwad</option>
+<option>Bagalkot</option>
+<option>Other</option>
+
+</select>
+
+</div>
+
+<div class="form-group">
+
+<label for="taluk">
+Taluk *
+</label>
+
+<input
+type="text"
+id="taluk"
+name="taluk"
+placeholder="Enter Taluk"
+required>
+
+</div>
+
+</div>
+
+<div class="form-row">
+
+<div class="form-group">
+
+<label for="village">
+Village *
+</label>
+
+<input
+type="text"
+id="village"
+name="village"
+placeholder="Enter Village Name"
+required>
+
+</div>
+
+<div class="form-group">
+
+<label for="pincode">
+Pincode *
+</label>
+
+<input
+type="number"
+id="pincode"
+name="pincode"
+maxlength="6"
+placeholder="585310"
+required>
+
+</div>
+
+</div>
+
+<div class="form-group">
+
+<label for="address">
+Full Address *
+</label>
+
+<textarea
+id="address"
+name="address"
+rows="4"
+placeholder="Enter Complete Address"
+required></textarea>
+
+</div>
+
+<!-- ========================= -->
+<!-- MEMBERSHIP DETAILS -->
+<!-- ========================= -->
+
+<h3 class="section-title">
+Membership Details
+</h3>
+
+<div class="form-row">
+
+<div class="form-group">
+
+<label for="membershipType">
+Membership Type *
+</label>
+
+<select
+id="membershipType"
+name="membershipType"
+required>
+
+<option value="">
+Select Membership
+</option>
+
+<option value="General">
+General Member
+</option>
+
+<option value="Life">
+Life Member
+</option>
+
+<option value="Volunteer">
+Volunteer
+</option>
+
+<option value="Executive">
+Executive Member
+</option>
+
+</select>
+
+</div>
+
+<div class="form-group">
+
+<label for="occupation">
+Occupation
+</label>
+
+<input
+type="text"
+id="occupation"
+name="occupation"
+placeholder="Occupation">
+
+</div>
+
+</div>
+
+<div class="form-row">
+
+<div class="form-group">
+
+<label for="joiningDate">
+Joining Date
+</label>
+
+<input
+type="date"
+id="joiningDate"
+name="joiningDate">
+
+</div>
+
+<div class="form-group">
+
+<label for="status">
+Status
+</label>
+
+<select
+id="status"
+name="status">
+
+<option value="Active" selected>
+Active
+</option>
+
+<option value="Inactive">
+Inactive
+</option>
+
+</select>
+
+</div>
+
+</div>
+<!-- ========================= -->
+<!-- PHOTO & EMERGENCY DETAILS -->
+<!-- ========================= -->
+
+<h3 class="section-title">
+
+Photo & Emergency Details
+
+</h3>
+
+<div class="form-group">
+
+<label for="photo">
+
+Member Photo *
+
+</label>
+
+<input
+type="file"
+id="photo"
+name="photo"
+accept="image/*"
+required>
+
+<small>
+
+Upload Passport Size Photo (JPG / PNG)
+
+</small>
+
+</div>
+
+<div class="photo-preview">
+
+<img
+id="photoPreview"
+src="images/default-user.png"
+alt="Photo Preview">
+
+</div>
+
+<div class="form-row">
+
+<div class="form-group">
+
+<label for="emergencyName">
+
+Emergency Contact Name
+
+</label>
+
+<input
+type="text"
+id="emergencyName"
+name="emergencyName"
+placeholder="Emergency Contact Name">
+
+</div>
+
+<div class="form-group">
+
+<label for="emergencyMobile">
+
+Emergency Mobile Number
+
+</label>
+
+<input
+type="tel"
+id="emergencyMobile"
+name="emergencyMobile"
+maxlength="10"
+placeholder="9876543210">
+
+</div>
+
+</div>
+
+<div class="form-group">
+
+<label for="relation">
+
+Relationship
+
+</label>
+
+<select
+id="relation"
+name="relation">
+
+<option value="">
+
+Select Relationship
+
+</option>
+
+<option>
+
+Father
+
+</option>
+
+<option>
+
+Mother
+
+</option>
+
+<option>
+
+Brother
+
+</option>
+
+<option>
+
+Sister
+
+</option>
+
+<option>
+
+Husband
+
+</option>
+
+<option>
+
+Wife
+
+</option>
+
+<option>
+
+Friend
+
+</option>
+
+<option>
+
+Other
+
+</option>
+
+</select>
+
+</div>
+
+<!-- ========================= -->
+<!-- DECLARATION -->
+<!-- ========================= -->
+
+<div class="declaration-box">
+
+<label class="checkbox-label">
+
+<input
+type="checkbox"
+id="declaration"
+required>
+
+<span>
+
+I hereby declare that the information provided above is true and correct.
+
+</span>
+
+</label>
+
+</div>
+
+<div id="successMessage"
+
+class="success-box"
+
+style="display:none;">
+
+✅ Registration Successful
+
+</div>
+
+<div id="errorMessage"
+
+class="error-box"
+
+style="display:none;">
+
+❌ Registration Failed
+
+</div>
+<!-- ========================= -->
+<!-- ACTION BUTTONS -->
+<!-- ========================= -->
+
+<div class="button-group">
+
+<button
+type="submit"
+class="btn"
+id="registerBtn">
+
+<i class="fa-solid fa-user-plus"></i>
+
+Register Member
+
+</button>
+
+<button
+type="reset"
+class="btn2">
+
+<i class="fa-solid fa-rotate-left"></i>
+
+Reset Form
+
+</button>
+
+<a
+href="index.html"
+class="btn2">
+
+<i class="fa-solid fa-house"></i>
+
+Back To Home
+
 </a>
 
 </div>
 
+<!-- ========================= -->
+<!-- LOADING -->
+<!-- ========================= -->
 
-<!-- Firebase -->
+<div
+id="loading"
 
-<script type="module">
+class="loader"
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+style="display:none;">
 
-import { getFirestore } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+</div>
 
-import { getStorage } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-storage.js";
+<!-- ========================= -->
+<!-- SUCCESS CARD -->
+<!-- ========================= -->
 
-const firebaseConfig = {
+<div
+id="registerSuccess"
 
-apiKey: "AIzaSyA1h6LJ0utIIxbzzEpcm38y32MZ1lwFCVo",
+class="success-card"
 
-authDomain: "bheema-koregaon-id.firebaseapp.com",
+style="display:none;">
 
-projectId: "bheema-koregaon-id",
+<i
+class="fa-solid fa-circle-check">
 
-storageBucket: "bheema-koregaon-id.firebasestorage.app",
+</i>
 
-messagingSenderId: "472642489350",
+<h2>
 
-appId: "1:472642489350:web:f95e96b4ad452325b48787",
+Registration Successful
 
-measurementId: "G-5K6CSD3R61"
+</h2>
+
+<p>
+
+Member Registered Successfully
+
+</p>
+
+<h3>
+
+Member ID
+
+</h3>
+
+<h2
+id="generatedMemberId">
+
+BK000001
+
+</h2>
+
+<a
+href="verify.html"
+class="btn">
+
+Verify Member
+
+</a>
+
+<a
+href="idcard.html"
+class="btn2">
+
+View ID Card
+
+</a>
+
+</div>
+
+</form>
+
+</div>
+
+</section>
+<!-- ========================= -->
+<!-- FOOTER -->
+<!-- ========================= -->
+
+<footer>
+
+<div class="footer-container">
+
+<div>
+
+<h3>
+
+Bhima Koregaon Member Portal
+
+</h3>
+
+<p>
+
+Equality • Justice • Freedom
+
+</p>
+
+</div>
+
+<div>
+
+<h3>
+
+Quick Links
+
+</h3>
+
+<ul>
+
+<li><a href="index.html">Home</a></li>
+
+<li><a href="register.html">Register</a></li>
+
+<li><a href="verify.html">Verify</a></li>
+
+<li><a href="admin.html">Admin</a></li>
+
+</ul>
+
+</div>
+
+<div>
+
+<h3>
+
+Contact
+
+</h3>
+
+<p>📍 Karnataka, India</p>
+
+<p>📞 +91 XXXXXXXXXX</p>
+
+<p>📧 your@email.com</p>
+
+</div>
+
+</div>
+
+<hr>
+
+<p class="copyright">
+
+© 2026 Bhima Koregaon Member Portal.
+All Rights Reserved.
+
+</p>
+
+</footer>
+
+<!-- ========================= -->
+<!-- SCROLL TO TOP -->
+<!-- ========================= -->
+
+<button
+id="topBtn"
+title="Go to top">
+
+↑
+
+</button>
+
+<!-- ========================= -->
+<!-- FIREBASE -->
+<!-- ========================= -->
+
+<script type="module" src="firebase.js"></script>
+
+<!-- ========================= -->
+<!-- REGISTER -->
+<!-- ========================= -->
+
+<script type="module" src="register.js"></script>
+
+<!-- ========================= -->
+<!-- PHOTO PREVIEW -->
+<!-- ========================= -->
+
+<script>
+
+const photoInput =
+document.getElementById("photo");
+
+const photoPreview =
+document.getElementById("photoPreview");
+
+photoInput.addEventListener("change", function(){
+
+const file = this.files[0];
+
+if(file){
+
+const reader = new FileReader();
+
+reader.onload = function(e){
+
+photoPreview.src = e.target.result;
+
+}
+
+reader.readAsDataURL(file);
+
+}
+
+});
+
+// Scroll Button
+
+const topBtn =
+document.getElementById("topBtn");
+
+window.onscroll = function(){
+
+if(document.body.scrollTop > 200 ||
+
+document.documentElement.scrollTop > 200){
+
+topBtn.style.display="block";
+
+}else{
+
+topBtn.style.display="none";
+
+}
 
 };
 
-const app = initializeApp(firebaseConfig);
+topBtn.onclick = function(){
 
-window.db = getFirestore(app);
+window.scrollTo({
 
-window.storage = getStorage(app);
+top:0,
+
+behavior:"smooth"
+
+});
+
+};
 
 </script>
 
-
-<script src="register.js"></script>
-
 </body>
+
 </html>
