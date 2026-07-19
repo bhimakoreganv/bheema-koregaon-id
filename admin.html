@@ -1,1 +1,544 @@
+<!DOCTYPE html>
+<html lang="kn">
+<head>
 
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>
+
+Admin Dashboard
+
+</title>
+
+<link
+rel="stylesheet"
+href="style.css">
+
+<link
+rel="preconnect"
+href="https://fonts.googleapis.com">
+
+<link
+rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
+
+<link
+href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+rel="stylesheet">
+
+<link
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+</head>
+
+<body>
+
+<!-- ========================= -->
+<!-- HEADER -->
+<!-- ========================= -->
+
+<header class="header">
+
+<div class="logo-area">
+
+<img
+src="images/logo.png"
+class="logo"
+alt="Logo">
+
+<div>
+
+<h1>
+
+Admin Dashboard
+
+</h1>
+
+<p>
+
+Bhima Koregaon
+Member Portal
+
+</p>
+
+</div>
+
+</div>
+
+</header>
+
+<!-- ========================= -->
+<!-- LOGIN -->
+<!-- ========================= -->
+
+<section class="admin-login">
+
+<div class="form-box">
+
+<h2>
+
+Administrator Login
+
+</h2>
+
+<label>
+
+Username
+
+</label>
+
+<input
+type="text"
+id="username"
+placeholder="Enter Username">
+
+<label>
+
+Password
+
+</label>
+
+<input
+type="password"
+id="password"
+placeholder="Enter Password">
+
+<button
+class="btn"
+onclick="adminLogin()">
+
+Login
+
+</button>
+
+<p
+id="loginMessage">
+
+</p>
+
+</div>
+
+</section>
+
+<!-- ========================= -->
+<!-- DASHBOARD -->
+<!-- ========================= -->
+
+<section
+id="dashboard"
+style="display:none;">
+
+<h2>
+
+Dashboard
+
+</h2>
+
+<div class="stats">
+
+<div class="stat-card">
+
+<i class="fa-solid fa-users"></i>
+
+<h3
+id="totalMembers">
+
+0
+
+</h3>
+
+<p>
+
+Total Members
+
+</p>
+
+</div>
+
+<div class="stat-card">
+
+<i class="fa-solid fa-id-card"></i>
+
+<h3
+id="verifiedMembers">
+
+0
+
+</h3>
+
+<p>
+
+Verified Members
+
+</p>
+
+</div>
+
+<div class="stat-card">
+
+<i class="fa-solid fa-money-bill"></i>
+
+<h3
+id="payments">
+
+₹0
+
+</h3>
+
+<p>
+
+Membership Fees
+
+</p>
+
+</div>
+
+<div class="stat-card">
+
+<i class="fa-solid fa-calendar"></i>
+
+<h3
+id="today">
+
+0
+
+</h3>
+
+<p>
+
+Today's Registrations
+
+</p>
+
+</div>
+
+</div>
+  <!-- ========================= -->
+<!-- MEMBER MANAGEMENT -->
+<!-- ========================= -->
+
+<section class="member-management">
+
+<h2>
+
+Member Management
+
+</h2>
+
+<div class="search-box">
+
+<input
+type="text"
+id="searchMember"
+placeholder="Search by Member ID / Name / Mobile">
+
+<button
+class="btn"
+onclick="searchMember()">
+
+🔍 Search
+
+</button>
+
+</div>
+
+<div class="table-responsive">
+
+<table class="member-table">
+
+<thead>
+
+<tr>
+
+<th>Photo</th>
+
+<th>Member ID</th>
+
+<th>Name</th>
+
+<th>Mobile</th>
+
+<th>District</th>
+
+<th>Status</th>
+
+<th>Actions</th>
+
+</tr>
+
+</thead>
+
+<tbody id="memberTable">
+
+<tr>
+
+<td colspan="7">
+
+No Members Found
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</section>
+
+<!-- ========================= -->
+<!-- ACTION BUTTONS -->
+<!-- ========================= -->
+
+<section class="admin-actions">
+
+<button
+class="btn"
+onclick="refreshMembers()">
+
+🔄 Refresh
+
+</button>
+
+<button
+class="btn">
+
+📥 Export Excel
+
+</button>
+
+<button
+class="btn">
+
+🖨 Print List
+
+</button>
+
+<button
+class="btn">
+
+➕ Add Member
+
+</button>
+
+</section>
+
+<!-- ========================= -->
+<!-- MEMBER DETAILS -->
+<!-- ========================= -->
+
+<section
+id="memberDetails"
+class="about"
+style="display:none;">
+
+<h2>
+
+Member Details
+
+</h2>
+
+<img
+id="viewPhoto"
+src="images/default-user.png"
+class="logo">
+
+<h3 id="viewName">
+
+Member Name
+
+</h3>
+
+<p>
+
+<b>Member ID:</b>
+
+<span id="viewId"></span>
+
+</p>
+
+<p>
+
+<b>Mobile:</b>
+
+<span id="viewMobile"></span>
+
+</p>
+
+<p>
+
+<b>Email:</b>
+
+<span id="viewEmail"></span>
+
+</p>
+
+<p>
+
+<b>District:</b>
+
+<span id="viewDistrict"></span>
+
+</p>
+
+<p>
+
+<b>Taluk:</b>
+
+<span id="viewTaluk"></span>
+
+</p>
+
+<p>
+
+<b>Village:</b>
+
+<span id="viewVillage"></span>
+
+</p>
+
+<p>
+
+<b>Address:</b>
+
+<span id="viewAddress"></span>
+
+</p>
+
+<div class="buttons">
+
+<button class="btn">
+
+✏ Edit
+
+</button>
+
+<button class="btn">
+
+🗑 Delete
+
+</button>
+
+<button class="btn">
+
+🪪 Print ID
+
+</button>
+
+</div>
+
+</section>
+  <!-- ========================= -->
+<!-- FOOTER -->
+<!-- ========================= -->
+
+<footer>
+
+<div class="footer-container">
+
+<div>
+
+<h3>
+
+Bhima Koregaon Member Portal
+
+</h3>
+
+<p>
+
+Equality • Justice • Freedom
+
+</p>
+
+</div>
+
+<div>
+
+<h3>
+
+Quick Links
+
+</h3>
+
+<ul>
+
+<li><a href="index.html">Home</a></li>
+
+<li><a href="register.html">Register</a></li>
+
+<li><a href="verify.html">Verify</a></li>
+
+<li><a href="admin.html">Admin</a></li>
+
+</ul>
+
+</div>
+
+<div>
+
+<h3>
+
+Admin Actions
+
+</h3>
+
+<button
+class="btn"
+onclick="adminLogout()">
+
+🚪 Logout
+
+</button>
+
+</div>
+
+</div>
+
+<hr>
+
+<p>
+
+© 2026 Bhima Koregaon Member Portal
+
+All Rights Reserved.
+
+</p>
+
+</footer>
+
+<!-- ========================= -->
+<!-- SCROLL TO TOP -->
+<!-- ========================= -->
+
+<button id="topBtn"
+onclick="window.scrollTo({
+top:0,
+behavior:'smooth'
+});">
+
+↑
+
+</button>
+
+<!-- ========================= -->
+<!-- FIREBASE -->
+<!-- ========================= -->
+
+<script type="module" src="firebase.js"></script>
+
+<!-- ========================= -->
+<!-- ADMIN LOGIC -->
+<!-- ========================= -->
+
+<script type="module" src="admin.js"></script>
+
+</body>
+
+</html>
